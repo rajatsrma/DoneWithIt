@@ -9,7 +9,7 @@ function Card({ title, subTitle, image }) {
       <Image style={styles.image} source={image}></Image>
       <View style={styles.detailsContainer}>
         <AppText style={styles.title}>{title}</AppText>
-        <AppText style={styles.subTitle}>{subTitle}</AppText>
+        <AppText style={styles.subTitle}>{"$" + subTitle}</AppText>
       </View>
     </View>
   );
@@ -18,11 +18,11 @@ function Card({ title, subTitle, image }) {
 const styles = StyleSheet.create({
   cardcontainer: {
     width: "100%",
-    height: 300,
+    height: 280,
     backgroundColor: "white",
     borderRadius: 15,
     overflow: "hidden",
-    marginTop: 70,
+    marginVertical: 5,
   },
   detailsContainer: {
     padding: 15,
@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 20,
     fontWeight: "500",
-    marginVertical: 7,
+    marginVertical: 4,
   },
   subTitle: {
     fontSize: 18,
