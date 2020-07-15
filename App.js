@@ -12,9 +12,20 @@ import ListIcon from "./app/components/ListIcon";
 import Screen from "./app/components/Screen";
 import MyAccountScreen from "./app/screens/MyAccountScreen";
 import ListingsScreen from "./app/screens/ListingsScreen";
+import AppTextInput from "./app/components/AppTextInput";
+import AppPicker from "./app/components/AppPicker";
+import LoginScreen from "./app/screens/LoginScreen";
+import RegisterScreen from "./app/screens/RegisterScreen";
+
+const categories = [
+  { category: "camera", value: 1 },
+  { category: "vehicles", value: 2 },
+  { category: "Fashion", value: 3 },
+  { category: "Grooming", value: 4 },
+];
 
 export default function App() {
-  return <ListingsScreen />;
+  return <LoginScreen />;
 }
 const styles = StyleSheet.create({
   container: {
