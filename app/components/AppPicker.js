@@ -14,28 +14,33 @@ import AppText from "./AppText";
 
 function AppPicker({
   items,
-  name,
+  iconName,
   placeholder,
   iconColor = colors.medium,
   size = 20,
+  onSelectItem,
+  selectedItem,
 }) {
   const [isVisible, setIsVisible] = useState(false);
-  const [selectedCategory, setSelectedCategory] = useState("");
   return (
     <>
-      <TouchableWithoutFeedback onPress={() => setIsVisible(true)}>
+      <TouchableWithoutFeedback
+        onPress={() => {
+          setIsVisible(true);
+        }}
+      >
         <View style={styles.inputContainer}>
-          {name && (
+          {iconName && (
             <MaterialCommunityIcons
               style={{ marginRight: 10 }}
-              name={name}
+              name={iconName}
               color={iconColor}
               size={size}
             />
           )}
 
           <AppText style={styles.text}>
-            {selectedCategory === "" ? placeholder : selectedCategory}
+            {selectedItem === null ? placeholder : selectedItem.category}
           </AppText>
           <MaterialCommunityIcons
             name="chevron-down"
@@ -51,7 +56,7 @@ function AppPicker({
           renderItem={({ item }) => (
             <TouchableOpacity
               onPress={() => {
-                setSelectedCategory(item.category);
+                onSelectItem(item);
                 setIsVisible(false);
               }}
             >
@@ -85,6 +90,7 @@ const styles = StyleSheet.create({
   },
   text: {
     flex: 1,
+    fontSize: 16,
   },
 });
 export default AppPicker;
