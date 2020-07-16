@@ -1,7 +1,7 @@
 import React from "react";
 import { View, StyleSheet, Alert, Image, TouchableOpacity } from "react-native";
 
-function ImagePreview({ imageUri, imageIndex, handleDelete }) {
+function ImagePreview({ imageUri, handleDelete }) {
   const twoButtonAlert = () => {
     Alert.alert(
       "Delete Alert",
@@ -10,7 +10,7 @@ function ImagePreview({ imageUri, imageIndex, handleDelete }) {
         { text: "NO" },
         {
           text: "YES",
-          onPress: () => handleDelete(imageIndex),
+          onPress: () => handleDelete(imageUri),
         },
       ],
       { cancelable: false }
@@ -18,7 +18,7 @@ function ImagePreview({ imageUri, imageIndex, handleDelete }) {
   };
   return (
     <View style={styles.container}>
-      {imageUri.length && (
+      {imageUri && (
         <TouchableOpacity onPress={twoButtonAlert}>
           <Image source={{ uri: imageUri }} style={styles.image} />
         </TouchableOpacity>

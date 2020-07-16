@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, StyleSheet } from "react-native";
 
 import WelcomeScreen from "./app/screens/WelcomeScreen";
@@ -27,9 +27,22 @@ const categories = [
 ];
 
 export default function App() {
+  const [imageUris, setImageUris] = useState([]);
+
+  const handleDelete = (uri) => {
+    setImageUris(imageUris.filter((imageUri) => imageUri !== uri));
+  };
+
+  const handleAdd = (uri) => {
+    setImageUris([...imageUris, uri]);
+  };
   return (
     <Screen>
-      <AppImageInput />
+      <AppImageInput
+        imageUris={imageUris}
+        handleAdd={handleAdd}
+        handleDelete={handleDelete}
+      />
     </Screen>
   );
 }
