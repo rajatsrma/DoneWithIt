@@ -6,6 +6,7 @@ import colors from "../config/colors";
 import defaultStyles from "../config/styles";
 
 function AppTextInput({
+  width = "100%",
   iconName,
   placeholder,
   iconColor = colors.medium,
@@ -13,7 +14,7 @@ function AppTextInput({
   ...otherProps
 }) {
   return (
-    <View style={styles.inputContainer}>
+    <View style={[styles.inputContainer, { width: width }]}>
       {iconName && (
         <MaterialCommunityIcons
           style={{ marginRight: 10 }}
@@ -34,7 +35,6 @@ function AppTextInput({
 
 const styles = StyleSheet.create({
   inputContainer: {
-    width: "100%",
     backgroundColor: colors.light,
     borderRadius: 30,
     padding: 15,

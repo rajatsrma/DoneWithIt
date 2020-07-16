@@ -1,11 +1,11 @@
 import React from "react";
-import { StyleSheet, View, FlatList, Text } from "react-native";
+import { StyleSheet, View, FlatList } from "react-native";
 
 import Screen from "../components/Screen";
-import ListItem from "../components/ListItem";
-import ListItemSeparator from "../components/ListItemSeparator";
+import ListItem from "../components/lists/ListItem";
+import ListItemSeparator from "../components/lists/ListItemSeparator";
 import colors from "../config/colors";
-import ListIcon from "../components/ListIcon";
+import ListIcon from "../components/lists/ListIcon";
 
 const itemsArr = [
   {

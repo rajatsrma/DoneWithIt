@@ -20,6 +20,7 @@ function AppPicker({
   size = 20,
   onSelectItem,
   selectedItem,
+  width = "100%",
 }) {
   const [isVisible, setIsVisible] = useState(false);
   return (
@@ -29,7 +30,7 @@ function AppPicker({
           setIsVisible(true);
         }}
       >
-        <View style={styles.inputContainer}>
+        <View style={[styles.inputContainer, { width: width }]}>
           {iconName && (
             <MaterialCommunityIcons
               style={{ marginRight: 10 }}

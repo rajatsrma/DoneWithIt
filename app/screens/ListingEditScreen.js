@@ -41,6 +41,7 @@ function ListingEditScreen() {
           placeholder="TItle"
         />
         <AppFormField
+          width="40%"
           autoCapitalize="none"
           autoCorrect={false}
           keyboardType="numeric"
@@ -48,6 +49,7 @@ function ListingEditScreen() {
           placeholder="Price"
         />
         <AppFormPicker
+          width="60%"
           data={data}
           placeholder="Category"
           fieldName="category"
