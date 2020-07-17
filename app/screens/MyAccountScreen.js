@@ -6,6 +6,7 @@ import ListItem from "../components/lists/ListItem";
 import ListItemSeparator from "../components/lists/ListItemSeparator";
 import colors from "../config/colors";
 import ListIcon from "../components/lists/ListIcon";
+import routes from "../navigations/routes";
 
 const itemsArr = [
   {
@@ -14,6 +15,7 @@ const itemsArr = [
     title: "My Listings",
     name: "format-list-bulleted",
     backgroundColor: colors.primary,
+    targetScreen: routes.MESSAGES_SCREEN,
   },
   {
     id: 2,
@@ -21,10 +23,11 @@ const itemsArr = [
     title: "My Messages",
     name: "email",
     backgroundColor: colors.secondary,
+    targetScreen: routes.MESSAGES_SCREEN,
   },
 ];
 
-function MyAccountScreen() {
+function MyAccountScreen({ navigation }) {
   return (
     <Screen style={{ backgroundColor: colors.light }}>
       <View style={styles.profileContainer}>
@@ -41,7 +44,7 @@ function MyAccountScreen() {
           renderItem={({ item }) => (
             <ListItem
               title={item.title}
-              onPress={() => console.log("ListItem clicked")}
+              onPress={() => navigation.navigate(item.targetScreen)}
               ImageComponent={
                 <ListIcon
                   name={item.name}

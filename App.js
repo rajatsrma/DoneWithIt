@@ -1,5 +1,11 @@
 import React, { useState } from "react";
 import { View, StyleSheet } from "react-native";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import {
+  NavigationContainer,
+  DarkTheme,
+  DefaultTheme,
+} from "@react-navigation/native";
 
 import WelcomeScreen from "./app/screens/WelcomeScreen";
 import ViewImageScreen from "./app/screens/ViewImageScreen ";
@@ -18,6 +24,14 @@ import LoginScreen from "./app/screens/LoginScreen";
 import RegisterScreen from "./app/screens/RegisterScreen";
 import ListingEditScreen from "./app/screens/ListingEditScreen";
 import AppImageInput from "./app/components/AppImageInput";
+import AppFormImagePicker from "./app/components/forms/AppFormImagePicker";
+import AppForm from "./app/components/forms/AppForm";
+import { color } from "react-native-reanimated";
+import colors from "./app/config/colors";
+import FeedStackNavigator from "./app/navigations/FeedStackNavigator";
+import AuthNavigator from "./app/navigations/AuthNavigator";
+import navigationTheme from "./app/navigations/navigationTheme";
+import AppNavigator from "./app/navigations/AppNavigator";
 
 const categories = [
   { category: "camera", value: 1 },
@@ -27,23 +41,10 @@ const categories = [
 ];
 
 export default function App() {
-  const [imageUris, setImageUris] = useState([]);
-
-  const handleDelete = (uri) => {
-    setImageUris(imageUris.filter((imageUri) => imageUri !== uri));
-  };
-
-  const handleAdd = (uri) => {
-    setImageUris([...imageUris, uri]);
-  };
   return (
-    <Screen>
-      <AppImageInput
-        imageUris={imageUris}
-        handleAdd={handleAdd}
-        handleDelete={handleDelete}
-      />
-    </Screen>
+    <NavigationContainer theme={navigationTheme}>
+      <AppNavigator />
+    </NavigationContainer>
   );
 }
 const styles = StyleSheet.create({

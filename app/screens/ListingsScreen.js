@@ -1,8 +1,10 @@
 import React from "react";
 import { StyleSheet, FlatList, Text } from "react-native";
+
 import Screen from "../components/Screen";
 import Card from "../components/Card";
 import colors from "../config/colors";
+import routes from "../navigations/routes";
 
 const itemsArr = [
   {
@@ -18,7 +20,7 @@ const itemsArr = [
     subtitle: 1000,
   },
 ];
-function ListingsScreen() {
+function ListingsScreen({ navigation }) {
   return (
     <Screen style={{ backgroundColor: colors.light, padding: 20 }}>
       <FlatList
@@ -29,6 +31,9 @@ function ListingsScreen() {
             title={item.title}
             image={item.image}
             subTitle={item.subtitle}
+            onPress={() =>
+              navigation.navigate(routes.LISTING_DETAILS_SCREEN, { item: item })
+            }
           />
         )}
       />

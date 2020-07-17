@@ -10,7 +10,10 @@ function AppImageInput({ imageUris = [], handleAdd, handleDelete }) {
   const refScrollView = useRef(null);
   const selectImage = async () => {
     try {
-      const result = await ImagePicker.launchImageLibraryAsync();
+      const result = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.Images,
+        quality: 0.5,
+      });
       if (!result.cancelled) {
         handleAdd(result.uri);
       }
