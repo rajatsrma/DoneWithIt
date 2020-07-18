@@ -12,10 +12,10 @@ function ViewDetailsScreen({
 }) {
   return (
     <View style={styles.container}>
-      <Image style={styles.image} source={item.image}></Image>
+      <Image style={styles.image} source={{ uri: item.images[0].url }}></Image>
       <View style={styles.detailsContainer}>
         <AppText style={styles.title}>{item.title}</AppText>
-        <AppText style={styles.price}>{`$ ${item.subtitle}`}</AppText>
+        <AppText style={styles.price}>{`$ ${item.price}`}</AppText>
       </View>
       <ListItem
         title="Rajat Sharma"
