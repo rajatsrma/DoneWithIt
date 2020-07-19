@@ -1,86 +1,76 @@
-import React, { useEffect, useState } from "react";
-import * as yup from "yup";
-import { StyleSheet } from "react-native";
+import React, { useState } from "react";
+import * as Yup from "yup";
 
-import AppForm from "../components/forms/AppForm";
-import AppFormField from "../components/forms/AppFormField";
-import AppSubmitButton from "../components/forms/AppSubmitButton";
 import Screen from "../components/Screen";
-import AppFormPicker from "../components/forms/AppFormPicker";
-import AppFormImagePicker from "../components/forms/AppFormImagePicker";
+import {
+  FormField as Field,
+  Form,
+  FormImagePicker as ImagePicker,
+  FormPicker as Picker,
+  SubmitButton as Submit,
+} from "../components/form";
+import { CategoryPickerItem } from "../components/pickers";
+import categories from "../config/categories.json";
 import useLocation from "../hooks/useLocation";
 import listingsApi from "../api/listings";
 
-const validationSchema = yup.object().shape({
-  title: yup.string().required().min(1).label("Title"),
-  price: yup.number().required().min(1).label("Price"),
-  description: yup.string().required().min(3).label("Description"),
-  category: yup.object().required().nullable().label("Category"),
-  imageUris: yup.array().min(1, "Please select atleast one image"),
+const validationSchema = Yup.object().shape({
+  images: Yup.array().min(1, "Please select at least one image"),
+  title: Yup.string().required().min(1).label("Title"),
+  price: Yup.number().required().min(1).max(10000).label("Price"),
+  category: Yup.string().required().nullable().label("Category"),
+  description: Yup.string().label("Description"),
 });
 
-const data = [
-  { category: "Electronics", value: 1 },
-  { category: "Furniture", value: 2 },
-  { category: "Grooming", value: 3 },
-  { category: "Sports", value: 4 },
-];
-
-function ListingEditScreen() {
+export default function ListingEditScreen() {
   const location = useLocation();
+
   const handleSubmit = async (listing) => {
-    const result = await listingsApi.postListings({ ...listing, location });
-    if (!result.ok) return alert("Could not save the image");
-    alert("success");
+    const result = await listingsApi.addListing({ ...listing, location });
+
+    if (!result.ok) return alert("Could not save the listing");
+    return alert("success");
   };
+
   return (
-    <Screen style={styles.container}>
-      <AppForm
+    <Screen>
+      <Form
         initialValues={{
           title: "",
           price: "",
-          description: "",
           category: null,
-          imageUris: [],
+          description: "",
+          images: [],
         }}
         onSubmit={handleSubmit}
         validationSchema={validationSchema}
       >
-        <AppFormImagePicker fieldName="imageUris" />
-        <AppFormField
-          autoCorrect={false}
-          fieldName="title"
-          placeholder="TItle"
-        />
-        <AppFormField
-          width="40%"
-          autoCapitalize="none"
-          autoCorrect={false}
+        <ImagePicker name="images" />
+        <Field maxLength={255} name="title" placeholder="Title" />
+        <Field
           keyboardType="numeric"
-          fieldName="price"
+          maxLength={8}
+          name="price"
           placeholder="Price"
+          width="30%"
         />
-        <AppFormPicker
-          width="60%"
-          data={data}
+        <Picker
+          items={categories}
+          name="category"
+          numberOfColumns={3}
+          PickerItemComponent={CategoryPickerItem}
           placeholder="Category"
-          fieldName="category"
+          width="50%"
         />
-        <AppFormField
-          autoCapitalize="none"
-          autoCorrect={false}
-          fieldName="description"
+        <Field
+          maxLength={255}
+          multiline
+          name="description"
+          numberOfLines={3}
           placeholder="Description"
         />
-        <AppSubmitButton title="Post" />
-      </AppForm>
+        <Submit title="Post" />
+      </Form>
     </Screen>
   );
 }
-const styles = StyleSheet.create({
-  container: {
-    padding: 20,
-  },
-});
-
-export default ListingEditScreen;
